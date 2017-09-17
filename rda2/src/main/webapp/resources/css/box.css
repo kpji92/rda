@@ -1,0 +1,94 @@
+.box_001
+{
+    border:1px solid #cbdced;
+    padding: 10px 5px 10px 5px;
+}
+
+.box_002
+{
+    border:1px dotted #aaaaaa;
+    padding: 10px 5px 10px 5px;
+}
+    
+.box_003
+{
+    border:2px dotted #ef6d18;
+    padding: 10px 5px 10px 5px;
+}
+
+#sms_phone
+{
+    width:190px;
+    height:282px;
+    background-image: url("../images/bg_sms_big2.gif");  
+}    
+    
+    #sms_phone #sms_box
+    {
+        position: relative;
+        width: 131px;
+        height: 150px;
+        padding-top: 90px;
+        padding-right: 23px;
+        padding-bottom: 0;
+        padding-left: 34px;        
+    }    
+    
+        #sms_phone #sms_box .phone
+        {
+            overflow-y: scroll;
+            font-size: 10pt;
+            font-family: 돋움체;
+            border-top-color: currentColor;
+            border-left-color: currentColor;
+            border-right-color: currentColor;
+            border-bottom-color: currentColor;
+            border-top-width: medium;
+            border-left-width: medium;
+            border-right-width: medium;
+            border-bottom-width: medium;
+            border-top-style: none;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            background-attachment: scroll;
+            background-repeat: repeat;
+            background-position: 0% 0%;
+            background-color: transparent;
+            width:131px;
+            height:78px;
+            color: #ffffff;
+            scrollbar-face-color: 2146283357;
+            scrollbar-shadow-color: 2143322164;
+            scrollbar-3dlight-color: 2143322164;
+            scrollbar-arrow-color: 2143322164;
+            scrollbar-darkshadow-color: 2146283357;
+            scrollbar-base-color: 2143322164;
+            scrollbar-track-color: 2146283357;
+        }
+        
+        #sms_phone #sms_box .byte 
+        { 
+            padding-top:15px;
+            text-align: center;
+            width: 131px;
+            font-family: 돋움;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 400;
+            font-size: 11px;
+            line-height: normal;
+            color: #ffffff;
+        }
+        
+    #sms_phone #sms_number
+    {
+        color:#ffffff;
+        text-align:center;
+    }
+    
+        #sms_phone #sms_number .callback_number
+        {
+            border:1px solid 010101;
+            width:80px;
+        }

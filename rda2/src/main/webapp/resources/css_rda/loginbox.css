@@ -1,0 +1,15 @@
+.loginbox_001
+{
+    width:300px;
+    border:1px solid #c3d9ff;
+    padding:3px;
+    margin:auto;
+    margin-top:60px;
+}
+    .loginbox_001 .inside
+    {
+        background-color:#e8eefa;
+        width:100%;
+        padding:13px 0 7px 0;
+        text-align:center;
+    }

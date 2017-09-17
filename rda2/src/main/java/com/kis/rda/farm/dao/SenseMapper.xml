@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SenseDao">
+
+
+<select id="ajaxsenseCountList" parameterType="Map" resultType="com.kis.rda.farm.domain.TbSenseCount">
+SELECT * FROM (
+			  SELECT ROWNUM NO, A.* FROM (
+			      SELECT SUM( DECODE(NODE_ID,'201610260001' ,1,0)) AS COW1 ,
+			      SUM( DECODE(NODE_ID,'201610260002' ,1,0)) AS COW2 ,
+			      SUM( DECODE(NODE_ID,'201610260003' ,1,0)) AS COW3 ,
+			      SUM( DECODE(NODE_ID,'201610260004' ,1,0)) AS COW4 ,
+			      SUM( DECODE(NODE_ID,'201610260005' ,1,0)) AS COW5 ,
+			      SUM( DECODE(NODE_ID,'201610260006' ,1,0)) AS COW6 ,
+			      SUM( DECODE(NODE_ID,'201610260007' ,1,0)) AS COW7 ,
+			      SUM( DECODE(NODE_ID,'201610260008' ,1,0)) AS COW8 ,
+			      SUM( DECODE(NODE_ID,'201610260009' ,1,0)) AS COW9 ,
+			      SUM( DECODE(NODE_ID,'201610260010' ,1,0)) AS COW10 ,
+			      TO_CHAR(DTIME, 'YYYY-MM-DD') as CDTIME,
+			      DEV_TYPE 
+			      FROM 
+			      TURBOSOFT.SENSE 
+			      where 
+			      DEV_TYPE='1' and ACTION_VALUE >= 1 
+			       GROUP BY TO_CHAR(DTIME, 'YYYY-MM-DD'),DEV_TYPE
+			        order by TO_CHAR(DTIME, 'YYYY-MM-DD') desc)a) 
+</select>
+
+<select id="ajaxsenseEntityList" parameterType="Map" resultType="com.kis.rda.farm.domain.TbSenseEntityList">
+ select 
+cu_id as SENSECUID  ,
+node_id as SENSENODEID  ,
+DEV_TYPE as SENSEDEVTIPE ,
+min(DTIME) as TEMDATE1 ,
+max(DTIME) as TEMDATE2  ,
+count(*) as TEMC  ,
+ROUND(AVG(ACTION_VALUE),3) as TEMAVR  ,
+ROUND(STDDEV(ACTION_VALUE),3) as TEMS  ,
+min(ACTION_VALUE) as TEMMIN ,
+max(ACTION_VALUE) as TEMMAX  
+
+ from TURBOSOFT.SENSE GROUP BY cu_id,node_id,DEV_TYPE ORDER BY node_id
+    </select>
+<select id="ajaxsenseStableList" parameterType="Map" resultType="com.kis.rda.farm.domain.TbsenseStableList">
+ select 
+  node_id as SENSENODEID ,
+ min(dtime) as UPFIRST ,
+ max(dtime) as UPLAST ,
+ count(*) as COT  ,
+ round(avg(co2) ,3) as CO2AVR ,
+ round(stddev(co2), 3) as CO2STD  ,
+ min(co2) as CO2MIN  ,
+ max(co2) as CO2MAX  ,
+ round(avg(temp) , 3) as TEMAVR ,
+ round(stddev(temp), 3) as TEMSTD  ,
+ min(temp) as TEMMIN ,
+ max(temp) as TEMMAX  ,
+ round(avg(hum) ,3) as HUMAVR  ,
+ round(stddev(hum) , 3) as HUMSTD  ,
+ min(hum) as HUMMIN  ,
+ max(hum) as HUMMAX
+ from 
+ TURBOSOFT.SENSE_ENV 
+ GROUP BY node_id 
+ order by NODE_ID
+</select>
+
+
+<select id="ajaxsenseEntityListDetail" parameterType="com.kis.rda.farm.domain.TbSenseEntityList" resultType="com.kis.rda.farm.domain.TbSenseEntityListDetail">
+ select * from(
+          select 
+          ACTION_VALUE as ACTIONVALUE,
+          DEV_TYPE as DEVTYPE,
+          DTIME 
+           from 
+           TURBOSOFT.SENSE 
+           where NODE_ID = #{NODEID} 
+           ORDER BY DTIME desc) 
+
+    </select>
+
+
+
+<select id="ajaxsenseStableListDetail" parameterType="com.kis.rda.farm.domain.TbsenseStableList" resultType="com.kis.rda.farm.domain.TbsenseStableList">
+     select  *  from(
+     			select CO2,
+     			TEMP,
+     			HUM,
+     			DTIME
+     			from 
+     			TURBOSOFT.SENSE_env 
+     			where NODE_ID = #{NODEID} 
+     			ORDER BY DTIME desc) 
+
+    </select>
+
+
+
+<!-- 목장자료 - 기존 목장 COUNT -->
+<select id="selectFarmCount" parameterType="Map" resultType="int">
+	SELECT
+		COUNT(farm_id)
+	FROM
+		RDA_TEST.FARM
+	<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+	WHERE
+		<choose>
+			<when test="searchOption =='fname'">
+				fname LIKE '%'||#{searchValue}||'%'
+			</when>
+			<when test="searchOption =='name'">
+				name LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	</if>
+</select>
+<!-- 목장자료 - 기존 목장 LIST-->
+<select id="selectFarmList" parameterType="Map" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM ( 
+   			SELECT 
+   				rownum as rnum, 
+   				A.*
+    		FROM (
+        			SELECT
+        				*
+       				FROM 
+       					RDA_TEST.FARM
+   					<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+					WHERE
+						<choose>
+							<when test="searchOption =='fname'">
+								 fname LIKE '%'||#{searchValue}||'%'
+							</when>
+							<when test="searchOption =='name'">
+								 name LIKE '%'||#{searchValue}||'%'
+							</when>
+						</choose>
+					</if>
+        			ORDER BY
+        				inputdate DESC
+      			) A
+    		WHERE 
+    			rownum &lt;= #{endRow}
+ 		) B
+	WHERE
+		B.rnum &gt;= #{beginRow}
+</select>
+<!-- 목장자료 - 기존 목장 EXCEL LIST -->
+<select id="selectFarmExcel" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM 
+		RDA_TEST.FARM 
+	ORDER BY
+		farm_id ASC
+</select>
+<!-- 목장 추가를 위한 ID값 SELECT -->
+<select id="selectFarmNewId" resultType="int">
+	SELECT 
+		NVL(max(farm_id),0)+1
+	FROM 
+		RDA_TEST.FARM
+</select>
+<!-- 목장 추가 -->
+<insert id="insertFarm" parameterType="com.kis.rda.farm.domain.Farm">
+	INSERT INTO rda_test.farm (
+		farm_id, 
+		address, 
+		fname, 
+		phone1, 
+		email, 
+		kc, 
+		mc, 
+		calf, 
+		hp1, 
+		name, 
+		phone2, 
+		phone3, 
+		hp2, 
+		hp3
+	) 
+	VALUES(
+		#{farmId},
+		#{address},
+		#{fname},
+		#{phone1},
+		#{email},
+		#{kc},
+		#{mc},
+		#{calf},
+		#{hp1},
+		#{name},
+		#{phone2},
+		#{phone3},
+		#{hp2},
+		#{hp3}
+	)	
+</insert>
+<!-- 목장자료 - 기존 목장 DETAIL -->
+<select id="selectFarmDetail" parameterType="String" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM
+		RDA_TEST.FARM
+	WHERE
+		farm_id = #{farmId}
+</select>
+<!-- 목장자료 - 기존 목장 UPDATE -->
+<update id="updateFarm" parameterType="com.kis.rda.farm.domain.Farm">
+	UPDATE rda_test.farm 
+	SET
+		fname = #{fname},
+		address = #{address},
+		phone1 = #{phone1},
+		kc = #{kc},
+		mc = #{mc},
+		calf = #{calf},
+		hp1 = #{hp1},
+		name = #{name},
+		phone2 = #{phone2},
+		phone3 = #{phone3},
+		hp2 = #{hp2},
+		hp3 = #{hp3},
+		updatedate = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	WHERE 
+		farm_id = #{farmId}
+</update>
+<!-- 목장자료 - 기존 목장 DELETE -->
+<delete id="deleteFarm" parameterType="String">
+	DELETE FROM rda_test.farm 
+	WHERE 
+		farm_id = #{farmId}
+</delete>
+
+<!-- 목장자료 - 신규 목장 COUNT -->
+<select id="selectNewFarmCount" parameterType="Map" resultType="int">
+	SELECT
+		COUNT(farm_id)
+	FROM
+		RDA_TEST.NEWFARM
+	<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+	WHERE
+		<choose>
+			<when test="searchOption =='fname'">
+				farm_name LIKE '%'||#{searchValue}||'%'
+			</when>
+			<when test="searchOption =='name'">
+				name LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	</if>
+</select>
+<!-- 목장자료 - 신규 목장 LIST-->
+<select id="selectNewFarmList" parameterType="Map" resultType="com.kis.rda.farm.domain.NewFarm">
+	SELECT
+		*
+	FROM ( 
+   			SELECT 
+   				rownum as rnum, 
+   				A.*
+    		FROM (
+        			SELECT
+        				*
+       				FROM 
+       					RDA_TEST.NEWFARM
+   					<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+					WHERE
+						<choose>
+							<when test="searchOption =='fname'">
+								 file_name LIKE '%'||#{searchValue}||'%'
+							</when>
+							<when test="searchOption =='name'">
+								 name LIKE '%'||#{searchValue}||'%'
+							</when>
+						</choose>
+					</if>
+        			ORDER BY
+        				inputdate DESC
+      			) A
+    		WHERE 
+    			rownum &lt;= #{endRow}
+ 		) B
+	WHERE
+		B.rnum &gt;= #{beginRow}
+</select>
+<!-- 목장자료 - 기존 목장 EXCEL LIST -->
+<select id="selectNewFarmExcel" resultType="com.kis.rda.farm.domain.NewFarm">
+	SELECT
+		*
+	FROM 
+		RDA_TEST.NEWFARM 
+	ORDER BY
+		farm_id ASC
+</select>
+</mapper>

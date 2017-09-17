@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EnvDao">
+
+
+         <resultMap id="bbsDataResult" type="com.kis.rda.common.domain.Environment">
+  
+                  <result property="FARM_ID" column="FARM_ID"  javaType="java.lang.String" />
+                  <result property="ENV_GATHERDATE" column="ENV_GATHERDATE" javaType="java.lang.String"/>
+                  <result property="CLEAN" column="CLEAN" javaType="java.lang.String"/>
+                  <result property="WTC" column="WTC" javaType="java.lang.String"/>
+                  <result property="WSQ" column="WSQ" javaType="java.lang.String"/> 
+                   <result property="FQ" column="FQ" javaType="java.lang.String"/>
+                   <result property="INPUTDATE" column="INPUTDATE" javaType="java.lang.String"/>
+                    <result property="UPDATEDATE" column="UPDATEDATE" javaType="java.lang.String"/>
+         </resultMap>
+
+ 
+  
+
+<!-- 목장자료 - 기존 목장 COUNT -->
+<select id="selectFarmCount" parameterType="Map" resultType="int">
+	SELECT
+		COUNT(farm_id)
+	FROM
+		RDA_TEST.FARM
+	<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+	WHERE
+		<choose>
+			<when test="searchOption =='fname'">
+				fname LIKE '%'||#{searchValue}||'%'
+			</when>
+			<when test="searchOption =='name'">
+				name LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	</if>
+</select>
+
+
+<select id="ajaxenvEntityList1" parameterType="Map" resultType="com.kis.rda.common.domain.Environment">
+SELECT  rownum as rnum,a.FARM_ID
+,a.ENV_GATHERDATE
+,a.CLEAN
+,a.WTC
+,a.WSQ
+,a.FQ
+,a.INPUTDATE
+,a.UPDATEDATE
+	FROM RDA_TEST.ENVIRONMENT a	WHERE FARM_ID=  #{farmId}
+</select>
+
+<select id="ajaxenvEntityList" parameterType="Map" resultMap="bbsDataResult">
+SELECT  rownum as rnum,a.FARM_ID
+,a.ENV_GATHERDATE
+,a.CLEAN
+,a.WTC
+,a.WSQ
+,a.FQ
+,a.INPUTDATE
+,a.UPDATEDATE
+	FROM RDA_TEST.ENVIRONMENT a	WHERE FARM_ID=  #{farmId}
+</select>
+
+<select id="envEntityUpdateSelectOne" parameterType="String" resultType="String">
+	SELECT 
+	a. FNAME
+	FROM 
+		RDA_TEST.FARM a WHERE   FARM_ID=  #{farmId}
+</select>
+
+<!--  환경 추가 -->
+<insert id="ajaxenvEntityInsertDo" parameterType="com.kis.rda.common.domain.Environment">
+	INSERT INTO rda_test.ENVIRONMENT (
+         
+				farm_id ,
+			 
+			<if test="CLEAN != null">
+				CLEAN ,
+			</if>
+			<if test="ENV_GATHERDATE != null">
+				ENV_GATHERDATE,
+				</if>
+			<if test="WTC != null">
+				WTC,
+			</if>
+			<if test="WSQ != null">
+				WSQ ,
+				</if>
+			<if test="FQ != null">
+				FQ , 
+			</if>
+					
+		INPUTDATE
+	) 
+	VALUES(
+		     #{FARM_ID},
+			<if test="CLEAN != null">
+				 #{CLEAN},
+			</if>
+			<if test="ENV_GATHERDATE != null">
+				#{ENV_GATHERDATE},
+				</if>
+			<if test="WTC != null">
+				 #{WTC},
+			</if>
+			<if test="WSQ != null">
+				 #{WSQ},
+				</if>
+			<if test="FQ != null">
+				 #{FQ}, 
+			</if>
+					
+		 to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 		
+	)	
+</insert>
+
+
+<update id="ajaxenvEntityUpdateDo" parameterType="com.kis.rda.common.domain.Environment"  >
+UPDATE rda_test.ENVIRONMENT 
+	SET
+
+			<if test="CLEAN != null">
+				CLEAN = #{CLEAN},
+			</if>
+			<if test="ENV_GATHERDATE != null">
+				ENV_GATHERDATE=#{ENV_GATHERDATE},
+				</if>
+			<if test="WTC != null">
+				WTC = #{WTC},
+			</if>
+			<if test="WSQ != null">
+				WSQ = #{WSQ},
+				</if>
+			<if test="FQ != null">
+				FQ = #{FQ}, 
+			</if>
+					
+		UPDATEDATE = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 		 
+	WHERE 
+		farm_id = #{FARM_ID}
+</update>
+
+<delete id="ajaxenvEntityDeleteDo" parameterType="com.kis.rda.common.domain.Environment"  >
+DELETE rda_test.ENVIRONMENT 
+	 	WHERE 
+		farm_id = #{FARM_ID}
+</delete>
+
+
+<!-- 목장자료 - 기존 목장 LIST-->
+<select id="selectFarmList" parameterType="Map" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM ( 
+   			SELECT 
+   				rownum as rnum, 
+   				A.*
+    		FROM (
+        			SELECT
+        				*
+       				FROM 
+       					RDA_TEST.FARM
+   					<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+					WHERE
+						<choose>
+							<when test="searchOption =='fname'">
+								 fname LIKE '%'||#{searchValue}||'%'
+							</when>
+							<when test="searchOption =='name'">
+								 name LIKE '%'||#{searchValue}||'%'
+							</when>
+						</choose>
+					</if>
+        			ORDER BY
+        				inputdate DESC
+      			) A
+    		WHERE 
+    			rownum &lt;= #{endRow}
+ 		) B
+	WHERE
+		B.rnum &gt;= #{beginRow}
+</select>
+<!-- 목장자료 - 기존 목장 EXCEL LIST -->
+<select id="selectFarmExcel" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM 
+		RDA_TEST.FARM 
+	ORDER BY
+		farm_id ASC
+</select>
+<!-- 목장 추가를 위한 ID값 SELECT -->
+<select id="selectFarmNewId" resultType="int">
+	SELECT 
+		NVL(max(farm_id),0)+1
+	FROM 
+		RDA_TEST.FARM
+</select>
+<!-- 목장 추가 -->
+<insert id="insertFarm" parameterType="com.kis.rda.farm.domain.Farm">
+	INSERT INTO rda_test.farm (
+		farm_id, 
+		address, 
+		fname, 
+		phone1, 
+		email, 
+		kc, 
+		mc, 
+		calf, 
+		hp1, 
+		name, 
+		phone2, 
+		phone3, 
+		hp2, 
+		hp3
+	) 
+	VALUES(
+		#{farmId},
+		#{address},
+		#{fname},
+		#{phone1},
+		#{email},
+		#{kc},
+		#{mc},
+		#{calf},
+		#{hp1},
+		#{name},
+		#{phone2},
+		#{phone3},
+		#{hp2},
+		#{hp3}
+	)	
+</insert>
+<!-- 목장자료 - 기존 목장 DETAIL -->
+<select id="selectFarmDetail" parameterType="String" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM
+		RDA_TEST.FARM
+	WHERE
+		farm_id = #{farmId}
+</select>
+<!-- 목장자료 - 기존 목장 UPDATE -->
+<update id="updateFarm" parameterType="com.kis.rda.farm.domain.Farm">
+	UPDATE rda_test.farm 
+	SET
+		fname = #{fname},
+		address = #{address},
+		phone1 = #{phone1},
+		kc = #{kc},
+		mc = #{mc},
+		calf = #{calf},
+		hp1 = #{hp1},
+		name = #{name},
+		phone2 = #{phone2},
+		phone3 = #{phone3},
+		hp2 = #{hp2},
+		hp3 = #{hp3},
+		updatedate = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	WHERE 
+		farm_id = #{farmId}
+</update>
+<!-- 목장자료 - 기존 목장 DELETE -->
+<delete id="deleteFarm" parameterType="String">
+	DELETE FROM rda_test.farm 
+	WHERE 
+		farm_id = #{farmId}
+</delete>
+
+<!-- 목장자료 - 신규 목장 COUNT -->
+<select id="selectNewFarmCount" parameterType="Map" resultType="int">
+	SELECT
+		COUNT(farm_id)
+	FROM
+		RDA_TEST.NEWFARM
+	<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+	WHERE
+		<choose>
+			<when test="searchOption =='fname'">
+				farm_name LIKE '%'||#{searchValue}||'%'
+			</when>
+			<when test="searchOption =='name'">
+				name LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	</if>
+</select>
+<!-- 목장자료 - 신규 목장 LIST-->
+<select id="selectNewFarmList" parameterType="Map" resultType="com.kis.rda.farm.domain.NewFarm">
+	SELECT
+		*
+	FROM ( 
+   			SELECT 
+   				rownum as rnum, 
+   				A.*
+    		FROM (
+        			SELECT
+        				*
+       				FROM 
+       					RDA_TEST.NEWFARM
+   					<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+					WHERE
+						<choose>
+							<when test="searchOption =='fname'">
+								 file_name LIKE '%'||#{searchValue}||'%'
+							</when>
+							<when test="searchOption =='name'">
+								 name LIKE '%'||#{searchValue}||'%'
+							</when>
+						</choose>
+					</if>
+        			ORDER BY
+        				inputdate DESC
+      			) A
+    		WHERE 
+    			rownum &lt;= #{endRow}
+ 		) B
+	WHERE
+		B.rnum &gt;= #{beginRow}
+</select>
+<!-- 목장자료 - 기존 목장 EXCEL LIST -->
+<select id="selectNewFarmExcel" resultType="com.kis.rda.farm.domain.NewFarm">
+	SELECT
+		*
+	FROM 
+		RDA_TEST.NEWFARM 
+	ORDER BY
+		farm_id ASC
+</select>
+
+
+
+
+
+</mapper>

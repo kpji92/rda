@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LabcheckDao">
+<resultMap id="cbcListResultMap" type="com.kis.rda.farm.domain.Cbcentity">
+     <result property="ENTITY_ID" column="ENTITY_ID"  javaType="java.lang.String" />						
+   <result property="CBC_GATHERDATE" column="CBC_GATHERDATE"  javaType="java.lang.String" />						
+   <result property="RBC" column="RBC"  javaType="java.lang.String" />						
+   <result property="HCT" column="HCT"  javaType="java.lang.String" />						
+   <result property="HB" column="HB"  javaType="java.lang.String" />						
+   <result property="MCV" column="MCV"  javaType="java.lang.String" />						
+   <result property="MCH" column="MCH"  javaType="java.lang.String" />						
+   <result property="MCHC" column="MCHC"  javaType="java.lang.String" />						
+   <result property="RDW" column="RDW"  javaType="java.lang.String" />						
+   <result property="RETIC1" column="RETIC1"  javaType="java.lang.String" />						
+   <result property="RETIC2" column="RETIC2"  javaType="java.lang.String" />						
+   <result property="WBC" column="WBC"  javaType="java.lang.String" />						
+   <result property="NE1" column="NE1"  javaType="java.lang.String" />						
+   <result property="LY1" column="LY1"  javaType="java.lang.String" />						
+   <result property="MO1" column="MO1"  javaType="java.lang.String" />						
+   <result property="EO1" column="EO1"  javaType="java.lang.String" />						
+   <result property="BA1" column="BA1"  javaType="java.lang.String" />						
+   <result property="NE2" column="NE2"  javaType="java.lang.String" />						
+   <result property="LY2" column="LY2"  javaType="java.lang.String" />						
+   <result property="MO2" column="MO2"  javaType="java.lang.String" />						
+   <result property="EO2" column="EO2"  javaType="java.lang.String" />						
+   <result property="BA2" column="BA2"  javaType="java.lang.String" />						
+   <result property="PLT" column="PLT"  javaType="java.lang.String" />						
+   <result property="MPV" column="MPV"  javaType="java.lang.String" />						
+   <result property="PDW" column="PDW"  javaType="java.lang.String" />						
+   <result property="PCT" column="PCT"  javaType="java.lang.String" />						
+   <result property="FMM" column="FMM"  javaType="java.lang.String" />						
+   <result property="EQUIPMENT" column="EQUIPMENT"  javaType="java.lang.String" />						
+   <result property="INPUTDATE" column="INPUTDATE"  javaType="java.lang.String" />						
+   <result property="UPDATEDATE" column="UPDATEDATE"  javaType="java.lang.String" />						
+   <result property="PP" column="PP"  javaType="java.lang.String" />						
+   <result property="SP" column="SP"  javaType="java.lang.String" />						
+   <result property="0" column="0"  javaType="java.lang.String" />						
+
+   </resultMap>
+<resultMap id="biochemicalListResultMap" type="com.kis.rda.farm.domain.Biochemicalentity">
+      <result property="ENTITY_ID" column="ENTITY_ID"  javaType="java.lang.String" />
+   <result property="BIO_GATHERDATE" column="BIO_GATHERDATE"  javaType="java.lang.String" />
+   <result property="TOTAL_PROTEIN" column="TOTAL_PROTEIN"  javaType="java.lang.String" />
+   <result property="ALBUMIN" column="ALBUMIN"  javaType="java.lang.String" />
+   <result property="BUN" column="BUN"  javaType="java.lang.String" />
+   <result property="GLUCOSE" column="GLUCOSE"  javaType="java.lang.String" />
+   <result property="NA" column="NA"  javaType="java.lang.String" />
+   <result property="K" column="K"  javaType="java.lang.String" />
+   <result property="CL" column="CL"  javaType="java.lang.String" />
+   <result property="EQUIPMENT" column="EQUIPMENT"  javaType="java.lang.String" />
+   <result property="INPUTDATE" column="INPUTDATE"  javaType="java.lang.String" />
+   <result property="UPDATEDATE" column="UPDATEDATE"  javaType="java.lang.String" />
+   
+   </resultMap>
+<resultMap id="phosListResultMap" type="com.kis.rda.farm.domain.Phosentity">
+      <result property="ENTITY_ID" column="ENTITY_ID"  javaType="java.lang.String" />
+   <result property="PHOS_GATHERDATE" column="PHOS_GATHERDATE"  javaType="java.lang.String" />
+   <result property="PHOS" column="PHOS"  javaType="java.lang.String" />
+   <result property="EQUIPMENT" column="EQUIPMENT"  javaType="java.lang.String" />
+   <result property="INPUTDATE" column="INPUTDATE"  javaType="java.lang.String" />
+   <result property="UPDATEDATE" column="UPDATEDATE"  javaType="java.lang.String" />
+   
+   </resultMap>
+   <resultMap id="istatListResultMap" type="com.kis.rda.farm.domain.Istatentity">
+      <result property="ENTITY_ID" column="ENTITY_ID"  javaType="java.lang.String" />
+   <result property="ISTAT_GATHERDATE" column="ISTAT_GATHERDATE"  javaType="java.lang.String" />
+   <result property="NA" column="NA"  javaType="java.lang.String" />
+   <result property="K" column="K"  javaType="java.lang.String" />
+   <result property="CL" column="CL"  javaType="java.lang.String" />
+   <result property="TCO2" column="TCO2"  javaType="java.lang.String" />
+   <result property="BUN" column="BUN"  javaType="java.lang.String" />
+   <result property="GLU" column="GLU"  javaType="java.lang.String" />
+   <result property="PH" column="PH"  javaType="java.lang.String" />
+   <result property="PCO2" column="PCO2"  javaType="java.lang.String" />
+   <result property="HCO3" column="HCO3"  javaType="java.lang.String" />
+   <result property="BE" column="BE"  javaType="java.lang.String" />
+   <result property="ANGAP" column="ANGAP"  javaType="java.lang.String" />
+   <result property="LACTATE" column="LACTATE"  javaType="java.lang.String" />
+   <result property="PO2" column="PO2"  javaType="java.lang.String" />
+   <result property="SO2" column="SO2"  javaType="java.lang.String" />
+   <result property="EQUIPMENT" column="EQUIPMENT"  javaType="java.lang.String" />
+   <result property="INPUTDATE" column="INPUTDATE"  javaType="java.lang.String" />
+   <result property="UPDATEDATE" column="UPDATEDATE"  javaType="java.lang.String" />
+   
+   </resultMap>
+   <resultMap id="immuneListResultMap" type="com.kis.rda.farm.domain.Immuneentity">
+      <result property="ENTITY_ID" column="ENTITY_ID"  javaType="java.lang.String" />
+   <result property="IMMUNE_GATHERDATE" column="IMMUNE_GATHERDATE"  javaType="java.lang.String" />
+   <result property="SAA" column="SAA"  javaType="java.lang.String" />
+   <result property="HAPTOGLOBIN" column="HAPTOGLOBIN"  javaType="java.lang.String" />
+   <result property="CRP" column="CRP"  javaType="java.lang.String" />
+   <result property="IGG" column="IGG"  javaType="java.lang.String" />
+   <result property="IGA" column="IGA"  javaType="java.lang.String" />
+   <result property="EQUIPMENT" column="EQUIPMENT"  javaType="java.lang.String" />
+   <result property="INPUTDATE" column="INPUTDATE"  javaType="java.lang.String" />
+   <result property="UPDATEDATE" column="UPDATEDATE"  javaType="java.lang.String" />
+   <result property="FB" column="FB"  javaType="java.lang.String" />
+   
+   </resultMap>
+   <resultMap id="infectionListResultMap" type="com.kis.rda.farm.domain.Infectionentity">
+      <result property="ENTITY_ID" column="ENTITY_ID"  javaType="java.lang.String" />
+   <result property="INFECTION_GATHERDATE" column="INFECTION_GATHERDATE"  javaType="java.lang.String" />
+   <result property="ECOLI" column="ECOLI"  javaType="java.lang.String" />
+   <result property="CORONAVIRUS" column="CORONAVIRUS"  javaType="java.lang.String" />
+   <result property="ROTAVIRUS" column="ROTAVIRUS"  javaType="java.lang.String" />
+   <result property="CRYPTOSPORIDIUM" column="CRYPTOSPORIDIUM"  javaType="java.lang.String" />
+   <result property="GIARDIA" column="GIARDIA"  javaType="java.lang.String" />
+   <result property="BVDAG" column="BVDAG"  javaType="java.lang.String" />
+   <result property="BVDAB" column="BVDAB"  javaType="java.lang.String" />
+   <result property="EIMERIA" column="EIMERIA"  javaType="java.lang.String" />
+   <result property="ETC" column="ETC"  javaType="java.lang.String" />
+   <result property="THEILERIA" column="THEILERIA"  javaType="java.lang.String" />
+   <result property="EQUIPMENT" column="EQUIPMENT"  javaType="java.lang.String" />
+   <result property="INPUTDATE" column="INPUTDATE"  javaType="java.lang.String" />
+   <result property="UPDATEDATE" column="UPDATEDATE"  javaType="java.lang.String" />
+   <result property="ROTA" column="ROTA"  javaType="java.lang.String" />
+   <result property="CORONA" column="CORONA"  javaType="java.lang.String" />
+   
+   </resultMap>
+
+<select id="ajaxcbcEntityListDetail" parameterType="com.kis.rda.farm.domain.Cbcentity" resultMap="cbcListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.CBC  a 
+ WHERE ENTITY_ID = #{ENTITY_ID}	
+</select>
+<select id="ajaxbiochemicalEntityListDetail" parameterType="com.kis.rda.farm.domain.Biochemicalentity" resultMap="biochemicalListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.BIOCHEMICAL  a 
+ WHERE ENTITY_ID = #{ENTITY_ID}	
+</select>
+<select id="ajaxphosEntityListDetail" parameterType="com.kis.rda.farm.domain.Phosentity" resultMap="phosListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.PHOS  a 
+ WHERE ENTITY_ID = #{ENTITY_ID}	
+</select>
+<select id="ajaxistatEntityListDetail" parameterType="com.kis.rda.farm.domain.Istatentity" resultMap="istatListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.ISTAT  a 
+ WHERE ENTITY_ID = #{ENTITY_ID}	
+</select>
+<select id="ajaximmuneEntityListDetail" parameterType="com.kis.rda.farm.domain.Immuneentity" resultMap="immuneListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.IMMUNE  a 
+ WHERE ENTITY_ID = #{ENTITY_ID}	
+</select>
+<select id="ajaxinfectionEntityListDetail" parameterType="com.kis.rda.farm.domain.Infectionentity" resultMap="infectionListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.INFECTION  a 
+ WHERE ENTITY_ID = #{ENTITY_ID}	
+</select>
+
+
+<select id="cbcEntitySelectOneBeforeUpdate" parameterType="String" resultMap="cbcListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.CBC  a 
+ WHERE seqno = #{entity_id}	
+</select>
+<select id="biochemicalEntitySelectOneBeforeUpdate" parameterType="String" resultMap="biochemicalListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.BIOCHEMICAL  a 
+ WHERE seqno = #{ENTITY_ID}	
+</select>
+<select id="phosEntitySelectOneBeforeUpdate" parameterType="String" resultMap="phosListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.PHOS  a 
+ WHERE seqno = #{ENTITY_ID}	
+</select>
+<select id="istatEntitySelectOneBeforeUpdate" parameterType="String" resultMap="istatListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.ISTAT  a 
+ WHERE seqno = #{ENTITY_ID}	
+</select>
+<select id="immuneEntitySelectOneBeforeUpdate" parameterType="String" resultMap="immuneListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.IMMUNE  a 
+ WHERE seqno = #{ENTITY_ID}	
+</select>
+<select id="infectionEntitySelectOneBeforeUpdate" parameterType="String" resultMap="infectionListResultMap">
+SELECT rownum as rnum,
+a.*
+ FROM RDA_TEST.INFECTION  a 
+ WHERE seqno = #{ENTITY_ID}	
+</select>
+
+<!-- 입력수정삭제 -->
+
+<insert id="ajaxcbcEntityInsertDo" parameterType="com.kis.rda.farm.domain.Cbcentity">
+INSERT INTO rda_test.CBC(					
+	SEQNO,				
+	<if test="ENTITY_ID!= null">ENTITY_ID,</if>				
+	<if test="CBC_GATHERDATE!= null">CBC_GATHERDATE,</if>				
+	<if test="RBC!= null">RBC,</if>				
+	<if test="HCT!= null">HCT,</if>				
+	<if test="HB!= null">HB,</if>				
+	<if test="MCV!= null">MCV,</if>				
+	<if test="MCH!= null">MCH,</if>				
+	<if test="MCHC!= null">MCHC,</if>				
+	<if test="RDW!= null">RDW,</if>				
+	<if test="RETIC1!= null">RETIC1,</if>				
+	<if test="RETIC2!= null">RETIC2,</if>				
+	<if test="WBC!= null">WBC,</if>				
+	<if test="NE1!= null">NE1,</if>				
+	<if test="LY1!= null">LY1,</if>				
+	<if test="MO1!= null">MO1,</if>				
+	<if test="EO1!= null">EO1,</if>				
+	<if test="BA1!= null">BA1,</if>				
+	<if test="NE2!= null">NE2,</if>				
+	<if test="LY2!= null">LY2,</if>				
+	<if test="MO2!= null">MO2,</if>				
+	<if test="EO2!= null">EO2,</if>				
+	<if test="BA2!= null">BA2,</if>				
+	<if test="PLT!= null">PLT,</if>				
+	<if test="MPV!= null">MPV,</if>				
+	<if test="PDW!= null">PDW,</if>				
+	<if test="PCT!= null">PCT,</if>				
+	<if test="FMM!= null">FMM,</if>				
+	<if test="EQUIPMENT!= null">EQUIPMENT,</if>	
+	<if test="PP!= null">PP,</if>				
+	<if test="SP!= null">SP,</if>				
+	 INPUTDATE				
+	)				
+	VALUES(				
+					
+	rda_test.SEQ_CBC.nextval,				
+	<if test="ENTITY_ID!= null">#{ENTITY_ID},</if>				
+	<if test="CBC_GATHERDATE!= null">#{CBC_GATHERDATE},</if>				
+	<if test="RBC!= null">#{RBC},</if>				
+	<if test="HCT!= null">#{HCT},</if>				
+	<if test="HB!= null">#{HB},</if>				
+	<if test="MCV!= null">#{MCV},</if>				
+	<if test="MCH!= null">#{MCH},</if>				
+	<if test="MCHC!= null">#{MCHC},</if>				
+	<if test="RDW!= null">#{RDW},</if>				
+	<if test="RETIC1!= null">#{RETIC1},</if>				
+	<if test="RETIC2!= null">#{RETIC2},</if>				
+	<if test="WBC!= null">#{WBC},</if>				
+	<if test="NE1!= null">#{NE1},</if>				
+	<if test="LY1!= null">#{LY1},</if>				
+	<if test="MO1!= null">#{MO1},</if>				
+	<if test="EO1!= null">#{EO1},</if>				
+	<if test="BA1!= null">#{BA1},</if>				
+	<if test="NE2!= null">#{NE2},</if>				
+	<if test="LY2!= null">#{LY2},</if>				
+	<if test="MO2!= null">#{MO2},</if>				
+	<if test="EO2!= null">#{EO2},</if>				
+	<if test="BA2!= null">#{BA2},</if>				
+	<if test="PLT!= null">#{PLT},</if>				
+	<if test="MPV!= null">#{MPV},</if>				
+	<if test="PDW!= null">#{PDW},</if>				
+	<if test="PCT!= null">#{PCT},</if>				
+	<if test="FMM!= null">#{FMM},</if>				
+	<if test="EQUIPMENT!= null">#{EQUIPMENT},</if>				
+			
+	<if test="PP!= null">#{PP},</if>				
+	<if test="SP!= null">#{SP},</if>				
+		 to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 			
+	)				
+
+</insert>
+ <update id="ajaxcbcEntityUpdateDo" parameterType="com.kis.rda.farm.domain.Cbcentity"  >		
+ UPDATE rda_test. CBC	
+SET	
+	
+<if test="ENTITY_ID!= null">ENTITY_ID=#{ENTITY_ID},</if>	
+<if test="CBC_GATHERDATE!= null">CBC_GATHERDATE=#{CBC_GATHERDATE},</if>	
+<if test="RBC!= null">RBC=#{RBC},</if>	
+<if test="HCT!= null">HCT=#{HCT},</if>	
+<if test="HB!= null">HB=#{HB},</if>	
+<if test="MCV!= null">MCV=#{MCV},</if>	
+<if test="MCH!= null">MCH=#{MCH},</if>	
+<if test="MCHC!= null">MCHC=#{MCHC},</if>	
+<if test="RDW!= null">RDW=#{RDW},</if>	
+<if test="RETIC1!= null">RETIC1=#{RETIC1},</if>	
+<if test="RETIC2!= null">RETIC2=#{RETIC2},</if>	
+<if test="WBC!= null">WBC=#{WBC},</if>	
+<if test="NE1!= null">NE1=#{NE1},</if>	
+<if test="LY1!= null">LY1=#{LY1},</if>	
+<if test="MO1!= null">MO1=#{MO1},</if>	
+<if test="EO1!= null">EO1=#{EO1},</if>	
+<if test="BA1!= null">BA1=#{BA1},</if>	
+<if test="NE2!= null">NE2=#{NE2},</if>	
+<if test="LY2!= null">LY2=#{LY2},</if>	
+<if test="MO2!= null">MO2=#{MO2},</if>	
+<if test="EO2!= null">EO2=#{EO2},</if>	
+<if test="BA2!= null">BA2=#{BA2},</if>	
+<if test="PLT!= null">PLT=#{PLT},</if>	
+<if test="MPV!= null">MPV=#{MPV},</if>	
+<if test="PDW!= null">PDW=#{PDW},</if>	
+<if test="PCT!= null">PCT=#{PCT},</if>	
+<if test="FMM!= null">FMM=#{FMM},</if>	
+<if test="EQUIPMENT!= null">EQUIPMENT=#{EQUIPMENT},</if>		
+<if test="PP!= null">PP=#{PP},</if>	
+<if test="SP!= null">SP=#{SP},</if>	
+	
+UPDATEDATE = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 	
+WHERE 	
+SEQNO=#{SEQNO}	
+ 
+</update>	
+<delete id="ajaxcbcEntityDeleteDo" parameterType="com.kis.rda.farm.domain.Cbcentity">
+DELETE rda_test.CBC 
+	 	WHERE 
+		SEQNO=#{SEQNO}	
+</delete>
+ 
+<insert id="ajaxbiochemicalEntityInsertDo" parameterType="com.kis.rda.farm.domain.Biochemicalentity">
+INSERT INTO rda_test.BIOCHEMICAL(		
+	SEQNO,	
+	<if test="ENTITY_ID!= null">ENTITY_ID,</if>	
+	<if test="BIO_GATHERDATE!= null">BIO_GATHERDATE,</if>	
+	<if test="TOTAL_PROTEIN!= null">TOTAL_PROTEIN,</if>	
+	<if test="ALBUMIN!= null">ALBUMIN,</if>	
+	<if test="BUN!= null">BUN,</if>	
+	<if test="GLUCOSE!= null">GLUCOSE,</if>	
+	<if test="NA!= null">NA,</if>	
+	<if test="K!= null">K,</if>	
+	<if test="CL!= null">CL,</if>	
+	<if test="EQUIPMENT!= null">EQUIPMENT,</if>	
+		
+	 INPUTDATE	
+	)	
+	VALUES(	
+		
+	rda_test.SEQ_BIOCHEMICAL.nextval	,
+	<if test="ENTITY_ID!= null">#{ENTITY_ID},</if>	
+	<if test="BIO_GATHERDATE!= null">#{BIO_GATHERDATE},</if>	
+	<if test="TOTAL_PROTEIN!= null">#{TOTAL_PROTEIN},</if>	
+	<if test="ALBUMIN!= null">#{ALBUMIN},</if>	
+	<if test="BUN!= null">#{BUN},</if>	
+	<if test="GLUCOSE!= null">#{GLUCOSE},</if>	
+	<if test="NA!= null">#{NA},</if>	
+	<if test="K!= null">#{K},</if>	
+	<if test="CL!= null">#{CL},</if>	
+	<if test="EQUIPMENT!= null">#{EQUIPMENT},</if>	
+	
+		 to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	)	
+
+</insert>
+ <update id="ajaxbiochemicalEntityUpdateDo" parameterType="com.kis.rda.farm.domain.Biochemicalentity"  >		
+ UPDATE rda_test. BIOCHEMICAL			
+SET			
+			
+<if test="ENTITY_ID!= null">ENTITY_ID=#{ENTITY_ID},</if>			
+<if test="BIO_GATHERDATE!= null">BIO_GATHERDATE=#{BIO_GATHERDATE},</if>			
+<if test="TOTAL_PROTEIN!= null">TOTAL_PROTEIN=#{TOTAL_PROTEIN},</if>			
+<if test="ALBUMIN!= null">ALBUMIN=#{ALBUMIN},</if>			
+<if test="BUN!= null">BUN=#{BUN},</if>			
+<if test="GLUCOSE!= null">GLUCOSE=#{GLUCOSE},</if>			
+<if test="NA!= null">NA=#{NA},</if>			
+<if test="K!= null">K=#{K},</if>			
+<if test="CL!= null">CL=#{CL},</if>			
+<if test="EQUIPMENT!= null">EQUIPMENT=#{EQUIPMENT},</if>	
+	
+UPDATEDATE = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 			 
+WHERE 			
+SEQNO=#{SEQNO}			
+ 
+</update>	
+<delete id="ajaxbiochemicalEntityDeleteDo" parameterType="com.kis.rda.farm.domain.Biochemicalentity">
+DELETE rda_test.BIOCHEMICAL 
+	 	WHERE 
+		SEQNO=#{SEQNO}	
+		</delete>
+
+<insert id="ajaxphosEntityInsertDo" parameterType="com.kis.rda.farm.domain.Phosentity">
+INSERT INTO rda_test.PHOS(		
+	SEQNO,	
+	<if test="ENTITY_ID!= null">ENTITY_ID,</if>	
+	<if test="PHOS_GATHERDATE!= null">PHOS_GATHERDATE,</if>	
+	<if test="PHOS!= null">PHOS,</if>	
+	<if test="EQUIPMENT!= null">EQUIPMENT,</if>	
+		
+		
+	 INPUTDATE	
+	)	
+	VALUES(	
+		
+	rda_test.SEQ_PHOS.nextval	,
+	<if test="ENTITY_ID!= null">#{ENTITY_ID},</if>	
+	<if test="PHOS_GATHERDATE!= null">#{PHOS_GATHERDATE},</if>	
+	<if test="PHOS!= null">#{PHOS},</if>	
+	<if test="EQUIPMENT!= null">#{EQUIPMENT},</if>	
+			 to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+)	
+	
+		
+		
+
+</insert>
+ <update id="ajaxphosEntityUpdateDo" parameterType="com.kis.rda.farm.domain.Phosentity"  >
+ UPDATE rda_test. PHOS	
+SET	
+	
+<if test="ENTITY_ID!= null">ENTITY_ID=#{ENTITY_ID},</if>	
+<if test="PHOS_GATHERDATE!= null">PHOS_GATHERDATE=#{PHOS_GATHERDATE},</if>	
+<if test="PHOS!= null">PHOS=#{PHOS},</if>	
+<if test="EQUIPMENT!= null">EQUIPMENT=#{EQUIPMENT},</if>	 
+
+UPDATEDATE = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 	
+WHERE 	
+SEQNO=#{SEQNO}	
+ 		
+</update>	
+<delete id="ajaxphosEntityDeleteDo" parameterType="com.kis.rda.farm.domain.Phosentity">
+DELETE rda_test.PHOS 
+	 	WHERE 
+		SEQNO=#{SEQNO}	
+		</delete>
+
+<insert id="ajaxistatEntityInsertDo" parameterType="com.kis.rda.farm.domain.Istatentity">
+INSERT INTO rda_test.ISTAT(		
+	SEQNO,	
+	<if test="ENTITY_ID!= null">ENTITY_ID,</if>	
+	<if test="ISTAT_GATHERDATE!= null">ISTAT_GATHERDATE,</if>	
+	<if test="NA!= null">NA,</if>	
+	<if test="K!= null">K,</if>	
+	<if test="CL!= null">CL,</if>	
+	<if test="TCO2!= null">TCO2,</if>	
+	<if test="BUN!= null">BUN,</if>	
+	<if test="GLU!= null">GLU,</if>	
+	<if test="PH!= null">PH,</if>	
+	<if test="PCO2!= null">PCO2,</if>	
+	<if test="HCO3!= null">HCO3,</if>	
+	<if test="BE!= null">BE,</if>	
+	<if test="ANGAP!= null">ANGAP,</if>	
+	<if test="LACTATE!= null">LACTATE,</if>	
+	<if test="PO2!= null">PO2,</if>	
+	<if test="SO2!= null">SO2,</if>	
+	<if test="EQUIPMENT!= null">EQUIPMENT,</if>	
+	 INPUTDATE	
+	)	
+	VALUES(	
+		
+	rda_test.SEQ_ISTAT.nextval	,
+	<if test="ENTITY_ID!= null">#{ENTITY_ID},</if>	
+	<if test="ISTAT_GATHERDATE!= null">#{ISTAT_GATHERDATE},</if>	
+	<if test="NA!= null">#{NA},</if>	
+	<if test="K!= null">#{K},</if>	
+	<if test="CL!= null">#{CL},</if>	
+	<if test="TCO2!= null">#{TCO2},</if>	
+	<if test="BUN!= null">#{BUN},</if>	
+	<if test="GLU!= null">#{GLU},</if>	
+	<if test="PH!= null">#{PH},</if>	
+	<if test="PCO2!= null">#{PCO2},</if>	
+	<if test="HCO3!= null">#{HCO3},</if>	
+	<if test="BE!= null">#{BE},</if>	
+	<if test="ANGAP!= null">#{ANGAP},</if>	
+	<if test="LACTATE!= null">#{LACTATE},</if>	
+	<if test="PO2!= null">#{PO2},</if>	
+	<if test="SO2!= null">#{SO2},</if>	
+	<if test="EQUIPMENT!= null">#{EQUIPMENT},</if>	
+	<if test="INPUTDATE!= null">#{INPUTDATE},</if>	
+	<if test="UPDATEDATE!= null">#{UPDATEDATE},</if>	
+		
+		 to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	)	
+
+</insert>
+ <update id="ajaxistatEntityUpdateDo" parameterType="com.kis.rda.farm.domain.Istatentity"  >		
+	UPDATE rda_test. ISTAT				
+	SET				
+					
+	<if test="ENTITY_ID!= null">ENTITY_ID=#{ENTITY_ID},</if>				
+	<if test="ISTAT_GATHERDATE!= null">ISTAT_GATHERDATE=#{ISTAT_GATHERDATE},</if>				
+	<if test="NA!= null">NA=#{NA},</if>				
+	<if test="K!= null">K=#{K},</if>				
+	<if test="CL!= null">CL=#{CL},</if>				
+	<if test="TCO2!= null">TCO2=#{TCO2},</if>				
+	<if test="BUN!= null">BUN=#{BUN},</if>				
+	<if test="GLU!= null">GLU=#{GLU},</if>				
+	<if test="PH!= null">PH=#{PH},</if>				
+	<if test="PCO2!= null">PCO2=#{PCO2},</if>				
+	<if test="HCO3!= null">HCO3=#{HCO3},</if>				
+	<if test="BE!= null">BE=#{BE},</if>				
+	<if test="ANGAP!= null">ANGAP=#{ANGAP},</if>				
+	<if test="LACTATE!= null">LACTATE=#{LACTATE},</if>				
+	<if test="PO2!= null">PO2=#{PO2},</if>				
+	<if test="SO2!= null">SO2=#{SO2},</if>				
+	<if test="EQUIPMENT!= null">EQUIPMENT=#{EQUIPMENT},</if>		 
+	UPDATEDATE = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 			 	
+	WHERE 				
+	SEQNO=#{SEQNO}				
+</update>	
+<delete id="ajaxistatEntityDeleteDo" parameterType="com.kis.rda.farm.domain.Istatentity">
+DELETE rda_test.ISTAT 
+	 	WHERE 
+		SEQNO=#{SEQNO}	
+		</delete>
+
+<insert id="ajaximmuneEntityInsertDo" parameterType="com.kis.rda.farm.domain.Immuneentity">
+INSERT INTO rda_test.IMMUNE(		
+	SEQNO,	
+	<if test="ENTITY_ID!= null">ENTITY_ID,</if>	
+	<if test="IMMUNE_GATHERDATE!= null">IMMUNE_GATHERDATE,</if>	
+	<if test="SAA!= null">SAA,</if>	
+	<if test="HAPTOGLOBIN!= null">HAPTOGLOBIN,</if>	
+	<if test="CRP!= null">CRP,</if>	
+	<if test="IGG!= null">IGG,</if>	
+	<if test="IGA!= null">IGA,</if>	
+	<if test="EQUIPMENT!= null">EQUIPMENT,</if>	 
+	<if test="FB!= null">FB,</if>	 
+		
+	 INPUTDATE	
+	)	
+	VALUES(	
+		
+	rda_test.SEQ_IMMUNE.nextval	,
+	<if test="ENTITY_ID!= null">#{ENTITY_ID},</if>	
+	<if test="IMMUNE_GATHERDATE!= null">#{IMMUNE_GATHERDATE},</if>	
+	<if test="SAA!= null">#{SAA},</if>	
+	<if test="HAPTOGLOBIN!= null">#{HAPTOGLOBIN},</if>	
+	<if test="CRP!= null">#{CRP},</if>	
+	<if test="IGG!= null">#{IGG},</if>	
+	<if test="IGA!= null">#{IGA},</if>	
+	<if test="EQUIPMENT!= null">#{EQUIPMENT},</if>	 
+	<if test="FB!= null">#{FB},</if>	 
+		 to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	)	
+		
+
+</insert>
+ <update id="ajaximmuneEntityUpdateDo" parameterType="com.kis.rda.farm.domain.Immuneentity"  >		
+UPDATE rda_test. IMMUNE			
+SET			
+			
+<if test="ENTITY_ID!= null">ENTITY_ID=#{ENTITY_ID},</if>			
+<if test="IMMUNE_GATHERDATE!= null">IMMUNE_GATHERDATE=#{IMMUNE_GATHERDATE},</if>			
+<if test="SAA!= null">SAA=#{SAA},</if>			
+<if test="HAPTOGLOBIN!= null">HAPTOGLOBIN=#{HAPTOGLOBIN},</if>			
+<if test="CRP!= null">CRP=#{CRP},</if>			
+<if test="IGG!= null">IGG=#{IGG},</if>			
+<if test="IGA!= null">IGA=#{IGA},</if>			
+<if test="EQUIPMENT!= null">EQUIPMENT=#{EQUIPMENT},</if>	 
+<if test="FB!= null">FB=#{FB},</if>			 
+			
+UPDATEDATE = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 			 
+WHERE 			
+SEQNO=#{SEQNO}			
+			
+</update>	
+<delete id="ajaximmuneEntityDeleteDo" parameterType="com.kis.rda.farm.domain.Immuneentity">
+DELETE rda_test.IMMUNE 
+	 	WHERE 
+		SEQNO=#{SEQNO}	
+		</delete>
+
+
+<insert id="ajaxinfectionEntityInsertDo" parameterType="com.kis.rda.farm.domain.Infectionentity">
+INSERT INTO rda_test.INFECTION(		
+	SEQNO,	
+	<if test="ENTITY_ID!= null">ENTITY_ID,</if>	
+	<if test="INFECTION_GATHERDATE!= null">INFECTION_GATHERDATE,</if>	
+	<if test="ECOLI!= null">ECOLI,</if>	
+	<if test="CORONAVIRUS!= null">CORONAVIRUS,</if>	
+	<if test="ROTAVIRUS!= null">ROTAVIRUS,</if>	
+	<if test="CRYPTOSPORIDIUM!= null">CRYPTOSPORIDIUM,</if>	
+	<if test="GIARDIA!= null">GIARDIA,</if>	
+	<if test="BVDAG!= null">BVDAG,</if>	
+	<if test="BVDAB!= null">BVDAB,</if>	
+	<if test="EIMERIA!= null">EIMERIA,</if>	
+	<if test="ETC!= null">ETC,</if>	
+	<if test="THEILERIA!= null">THEILERIA,</if>	
+	<if test="EQUIPMENT!= null">EQUIPMENT,</if>	 
+	<if test="ROTA!= null">ROTA,</if>	
+	<if test="CORONA!= null">CORONA,</if>	 
+	 INPUTDATE	
+	)	
+	VALUES(	
+		
+	rda_test.SEQ_INFECTION.nextval	,
+	<if test="ENTITY_ID!= null">#{ENTITY_ID},</if>	
+	<if test="INFECTION_GATHERDATE!= null">#{INFECTION_GATHERDATE},</if>	
+	<if test="ECOLI!= null">#{ECOLI},</if>	
+	<if test="CORONAVIRUS!= null">#{CORONAVIRUS},</if>	
+	<if test="ROTAVIRUS!= null">#{ROTAVIRUS},</if>	
+	<if test="CRYPTOSPORIDIUM!= null">#{CRYPTOSPORIDIUM},</if>	
+	<if test="GIARDIA!= null">#{GIARDIA},</if>	
+	<if test="BVDAG!= null">#{BVDAG},</if>	
+	<if test="BVDAB!= null">#{BVDAB},</if>	
+	<if test="EIMERIA!= null">#{EIMERIA},</if>	
+	<if test="ETC!= null">#{ETC},</if>	
+	<if test="THEILERIA!= null">#{THEILERIA},</if>	
+	<if test="EQUIPMENT!= null">#{EQUIPMENT},</if>	 
+	<if test="ROTA!= null">#{ROTA},</if>	
+	<if test="CORONA!= null">#{CORONA},</if>	 
+		
+		 to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	)	
+		
+</insert>
+ <update id="ajaxinfectionEntityUpdateDo" parameterType="com.kis.rda.farm.domain.Infectionentity"  >		
+UPDATE rda_test. INFECTION		
+SET		
+		
+<if test="ENTITY_ID!= null">ENTITY_ID=#{ENTITY_ID},</if>		
+<if test="INFECTION_GATHERDATE!= null">INFECTION_GATHERDATE=#{INFECTION_GATHERDATE},</if>		
+<if test="ECOLI!= null">ECOLI=#{ECOLI},</if>		
+<if test="CORONAVIRUS!= null">CORONAVIRUS=#{CORONAVIRUS},</if>		
+<if test="ROTAVIRUS!= null">ROTAVIRUS=#{ROTAVIRUS},</if>		
+<if test="CRYPTOSPORIDIUM!= null">CRYPTOSPORIDIUM=#{CRYPTOSPORIDIUM},</if>		
+<if test="GIARDIA!= null">GIARDIA=#{GIARDIA},</if>		
+<if test="BVDAG!= null">BVDAG=#{BVDAG},</if>		
+<if test="BVDAB!= null">BVDAB=#{BVDAB},</if>		
+<if test="EIMERIA!= null">EIMERIA=#{EIMERIA},</if>		
+<if test="ETC!= null">ETC=#{ETC},</if>		
+<if test="THEILERIA!= null">THEILERIA=#{THEILERIA},</if>		
+<if test="EQUIPMENT!= null">EQUIPMENT=#{EQUIPMENT},</if>		 
+<if test="ROTA!= null">ROTA=#{ROTA},</if>		
+<if test="CORONA!= null">CORONA=#{CORONA},</if>	 
+		 
+UPDATEDATE = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 		
+WHERE 		
+SEQNO=#{SEQNO}		
+		
+</update>	
+<delete id="ajaxinfectionEntityDeleteDo" parameterType="com.kis.rda.farm.domain.Infectionentity">
+DELETE rda_test.INFECTION 
+	 	WHERE 
+		SEQNO=#{SEQNO}	
+		</delete>
+
+ 
+
+<!-- 목장자료 - 기존 목장 COUNT -->
+<select id="selectFarmCount" parameterType="Map" resultType="int">
+	SELECT
+		COUNT(farm_id)
+	FROM
+		RDA_TEST.FARM
+	<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+	WHERE
+		<choose>
+			<when test="searchOption =='fname'">
+				fname LIKE '%'||#{searchValue}||'%'
+			</when>
+			<when test="searchOption =='name'">
+				name LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	</if>
+</select>
+<!-- 목장자료 - 기존 목장 LIST-->
+<select id="selectFarmList" parameterType="Map" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM ( 
+   			SELECT 
+   				rownum as rnum, 
+   				A.*
+    		FROM (
+        			SELECT
+        				*
+       				FROM 
+       					RDA_TEST.FARM
+   					<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+					WHERE
+						<choose>
+							<when test="searchOption =='fname'">
+								 fname LIKE '%'||#{searchValue}||'%'
+							</when>
+							<when test="searchOption =='name'">
+								 name LIKE '%'||#{searchValue}||'%'
+							</when>
+						</choose>
+					</if>
+        			ORDER BY
+        				inputdate DESC
+      			) A
+    		WHERE 
+    			rownum &lt;= #{endRow}
+ 		) B
+	WHERE
+		B.rnum &gt;= #{beginRow}
+</select>
+<!-- 목장자료 - 기존 목장 EXCEL LIST -->
+<select id="selectFarmExcel" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM 
+		RDA_TEST.FARM 
+	ORDER BY
+		farm_id ASC
+</select>
+<!-- 목장 추가를 위한 ID값 SELECT -->
+<select id="selectFarmNewId" resultType="int">
+	SELECT 
+		NVL(max(farm_id),0)+1
+	FROM 
+		RDA_TEST.FARM
+</select>
+<!-- 목장 추가 -->
+<insert id="insertFarm" parameterType="com.kis.rda.farm.domain.Farm">
+	INSERT INTO rda_test.farm (
+		farm_id, 
+		address, 
+		fname, 
+		phone1, 
+		email, 
+		kc, 
+		mc, 
+		calf, 
+		hp1, 
+		name, 
+		phone2, 
+		phone3, 
+		hp2, 
+		hp3
+	) 
+	VALUES(
+		#{farmId},
+		#{address},
+		#{fname},
+		#{phone1},
+		#{email},
+		#{kc},
+		#{mc},
+		#{calf},
+		#{hp1},
+		#{name},
+		#{phone2},
+		#{phone3},
+		#{hp2},
+		#{hp3}
+	)	
+</insert>
+<!-- 목장자료 - 기존 목장 DETAIL -->
+<select id="selectFarmDetail" parameterType="String" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM
+		RDA_TEST.FARM
+	WHERE
+		farm_id = #{farmId}
+</select>
+<!-- 목장자료 - 기존 목장 UPDATE -->
+<update id="updateFarm" parameterType="com.kis.rda.farm.domain.Farm">
+	UPDATE rda_test.farm 
+	SET
+		fname = #{fname},
+		address = #{address},
+		phone1 = #{phone1},
+		kc = #{kc},
+		mc = #{mc},
+		calf = #{calf},
+		hp1 = #{hp1},
+		name = #{name},
+		phone2 = #{phone2},
+		phone3 = #{phone3},
+		hp2 = #{hp2},
+		hp3 = #{hp3},
+		updatedate = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	WHERE 
+		farm_id = #{farmId}
+</update>
+<!-- 목장자료 - 기존 목장 DELETE -->
+<delete id="deleteFarm" parameterType="String">
+	DELETE FROM rda_test.farm 
+	WHERE 
+		farm_id = #{farmId}
+</delete>
+
+<!-- 목장자료 - 신규 목장 COUNT -->
+<select id="selectNewFarmCount" parameterType="Map" resultType="int">
+	SELECT
+		COUNT(farm_id)
+	FROM
+		RDA_TEST.NEWFARM
+	<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+	WHERE
+		<choose>
+			<when test="searchOption =='fname'">
+				farm_name LIKE '%'||#{searchValue}||'%'
+			</when>
+			<when test="searchOption =='name'">
+				name LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	</if>
+</select>
+<!-- 목장자료 - 신규 목장 LIST-->
+<select id="selectNewFarmList" parameterType="Map" resultType="com.kis.rda.farm.domain.NewFarm">
+	SELECT
+		*
+	FROM ( 
+   			SELECT 
+   				rownum as rnum, 
+   				A.*
+    		FROM (
+        			SELECT
+        				*
+       				FROM 
+       					RDA_TEST.NEWFARM
+   					<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+					WHERE
+						<choose>
+							<when test="searchOption =='fname'">
+								 file_name LIKE '%'||#{searchValue}||'%'
+							</when>
+							<when test="searchOption =='name'">
+								 name LIKE '%'||#{searchValue}||'%'
+							</when>
+						</choose>
+					</if>
+        			ORDER BY
+        				inputdate DESC
+      			) A
+    		WHERE 
+    			rownum &lt;= #{endRow}
+ 		) B
+	WHERE
+		B.rnum &gt;= #{beginRow}
+</select>
+<!-- 목장자료 - 기존 목장 EXCEL LIST -->
+<select id="selectNewFarmExcel" resultType="com.kis.rda.farm.domain.NewFarm">
+	SELECT
+		*
+	FROM 
+		RDA_TEST.NEWFARM 
+	ORDER BY
+		farm_id ASC
+</select>
+</mapper>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BirDao">
+
+ <resultMap id="EntityListResultMap" type="com.kis.rda.farm.domain.EntityList">
+ 	<result property="rnum" column="rnum"  javaType="java.lang.String" />
+	<result property="ENTITY_ID" column="ENTITY_ID"  javaType="java.lang.String" />
+   <result property="BREEDING" column="BREEDING"  javaType="java.lang.String" />
+   <result property="VARIETY" column="VARIETY"  javaType="java.lang.String" />
+   <result property="GENDER" column="GENDER"  javaType="java.lang.String" />
+   <result property="BIRTH" column="BIRTH"  javaType="java.lang.String" />
+   <result property="BIRTH_WEIGHT" column="BIRTH_WEIGHT"  javaType="java.lang.String" />
+   <result property="COLOSTRUM" column="COLOSTRUM"  javaType="java.lang.String" />
+   <result property="VACCINE" column="VACCINE"  javaType="java.lang.String" />
+   <result property="BIRTH_NUMBER" column="BIRTH_NUMBER"  javaType="java.lang.String" />
+   <result property="BIRTH_CASE" column="BIRTH_CASE"  javaType="java.lang.String" />
+   <result property="INPUTDATE" column="INPUTDATE"  javaType="java.lang.String" />
+   <result property="UPDATEDATE" column="UPDATEDATE"  javaType="java.lang.String" />
+   <result property="CASENUM" column="CASENUM"  javaType="java.lang.String" />
+     </resultMap>
+
+
+ <resultMap id="BirListResultMap" type="com.kis.rda.farm.domain.BirUpdate">
+   <result property="ENTITY_ID" column="ENTITY_ID"  javaType="java.lang.String" />								
+   <result property="CHECK_DATE" column="CHECK_DATE"  javaType="java.lang.String" />								
+   <result property="TEMPER" column="TEMPER"  javaType="java.lang.String" />								
+   <result property="HEARTRATE" column="HEARTRATE"  javaType="java.lang.String" />								
+   <result property="BREATHRATE" column="BREATHRATE"  javaType="java.lang.String" />								
+   <result property="MEDICINE" column="MEDICINE"  javaType="java.lang.String" />								
+   <result property="DIARRHEA" column="DIARRHEA"  javaType="java.lang.String" />								
+   <result property="FECES_STATE" column="FECES_STATE"  javaType="java.lang.String" />								
+   <result property="FECES_COLOR" column="FECES_COLOR"  javaType="java.lang.String" />								
+   <result property="FECES_BLOOD" column="FECES_BLOOD"  javaType="java.lang.String" />								
+   <result property="DEHYDRATION" column="DEHYDRATION"  javaType="java.lang.String" />								
+   <result property="INPUTDATE" column="INPUTDATE"  javaType="java.lang.String" />								
+   <result property="UPDATEDATE" column="UPDATEDATE"  javaType="java.lang.String" />								
+								
+  </resultMap>
+
+<select id="ajaxbirEntityListDetail" parameterType="com.kis.rda.farm.domain.BirUpdate" resultMap="BirListResultMap">
+SELECT rownum as rnum,
+a.ENTITY_ID,
+a.CHECK_DATE,
+a.TEMPER,
+a.HEARTRATE,
+a.BREATHRATE,
+a.MEDICINE,
+a.DIARRHEA,
+a.FECES_STATE,
+a.FECES_COLOR,
+a.FECES_BLOOD,
+a.DEHYDRATION
+ FROM RDA_TEST.BIR  a 
+ WHERE ENTITY_ID = #{ENTITY_ID}	
+
+</select>
+ <select id="birEntityUpdateSelectOne" parameterType="String" resultType="String">
+	SELECT 
+	a. FNAME
+	FROM 
+		RDA_TEST.FARM a WHERE   FARM_ID=  #{farmId}
+</select>
+ <select id="birEntityInsertSelectOne" parameterType="String" resultType="String">
+	select (#{farm_id})|| CASE
+        WHEN LPAD((max(substr(entity_id,4,6))+1),3,'0') is null THEN '001'   
+        ELSE LPAD((max(substr(entity_id,4,6))+1),3,'0')                                                    
+    END 
+	from 
+	 rda_test.bir
+    where
+     substr(entity_id,0,3)=#{farm_id}
+</select>
+ <update id="ajaxbirEntityUpdatetDo" parameterType="com.kis.rda.farm.domain.BirUpdate"  >				
+UPDATE rda_test.BIR
+			SET					
+					
+<if test="CHECK_DATE!= null">CHECK_DATE=#{CHECK_DATE},</if>					
+<if test="TEMPER!= null">TEMPER=#{TEMPER},</if>					
+<if test="HEARTRATE!= null">HEARTRATE=#{HEARTRATE},</if>					
+<if test="BREATHRATE!= null">BREATHRATE=#{BREATHRATE},</if>					
+<if test="MEDICINE!= null">MEDICINE=#{MEDICINE},</if>					
+<if test="DIARRHEA!= null">DIARRHEA=#{DIARRHEA},</if>					
+<if test="FECES_STATE!= null">FECES_STATE=#{FECES_STATE},</if>					
+<if test="FECES_COLOR!= null">FECES_COLOR=#{FECES_COLOR},</if>					
+<if test="FECES_BLOOD!= null">FECES_BLOOD=#{FECES_BLOOD},</if>					
+<if test="DEHYDRATION!= null">DEHYDRATION=#{DEHYDRATION},</if>					
+					
+					
+UPDATEDATE = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 			 		
+WHERE 					
+ENTITY_ID=#{ENTITY_ID}					
+	
+</update>				
+ 
+ <insert id="ajaxbirEntityInsertDo" parameterType="com.kis.rda.farm.domain.BirUpdate">
+ 
+ INSERT INTO rda_test.BIR(		
+	ENTITY_ID,	
+	<if test="CHECK_DATE!= null">CHECK_DATE,</if>	
+	<if test="TEMPER!= null">TEMPER,</if>	
+	<if test="HEARTRATE!= null">HEARTRATE,</if>	
+	<if test="BREATHRATE!= null">BREATHRATE,</if>	
+	<if test="MEDICINE!= null">MEDICINE,</if>	
+	<if test="DIARRHEA!= null">DIARRHEA,</if>	
+	<if test="FECES_STATE!= null">FECES_STATE,</if>	
+	<if test="FECES_COLOR!= null">FECES_COLOR,</if>	
+	<if test="FECES_BLOOD!= null">FECES_BLOOD,</if>			
+	<if test="DEHYDRATION!= null">DEHYDRATION,</if>
+	
+	INPUTDATE)	
+	VALUES(	
+     #{ENTITY_ID},
+	<if test="CHECK_DATE!= null">#{CHECK_DATE},</if>	
+	<if test="TEMPER!= null">#{TEMPER},</if>	
+	<if test="HEARTRATE!= null">#{HEARTRATE},</if>	
+	<if test="BREATHRATE!= null">#{BREATHRATE},</if>	
+	<if test="MEDICINE!= null">#{MEDICINE},</if>	
+	<if test="DIARRHEA!= null">#{DIARRHEA},</if>	
+	<if test="FECES_STATE!= null">#{FECES_STATE},</if>	
+	<if test="FECES_COLOR!= null">#{FECES_COLOR},</if>	
+	<if test="FECES_BLOOD!= null">#{FECES_BLOOD},</if>
+<if test="DEHYDRATION!= null">#{DEHYDRATION},</if>
+
+		 to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	)	
+ 
+ </insert>
+ 
+ 
+<select id="ajaxentityEntityList" parameterType="com.kis.rda.farm.domain.EntityList" resultMap="EntityListResultMap">
+select  rownum as rnum, 
+ENTITY_ID	,	   
+BREEDING	,	   
+VARIETY	,	   
+GENDER	,	   
+BIRTH	,	   
+BIRTH_WEIGHT 	,	   
+COLOSTRUM	,	   
+VACCINE	,	   
+BIRTH_NUMBER	,	   
+BIRTH_CASE	,	   
+INPUTDATE	,	   
+UPDATEDATE	,	   
+substr(CASENUM,6,5)	 as CASENUM
+  from
+   RDA_TEST.ENTITY 
+  WHERE 
+  substr(entity_id,1,3) =#{farm_id} order by entity_id
+
+</select>
+ 
+<!-- 목장자료 - 기존 목장 COUNT -->
+<select id="selectFarmCount" parameterType="Map" resultType="int">
+	SELECT
+		COUNT(farm_id)
+	FROM
+		RDA_TEST.FARM
+	<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+	WHERE
+		<choose>
+			<when test="searchOption =='fname'">
+				fname LIKE '%'||#{searchValue}||'%'
+			</when>
+			<when test="searchOption =='name'">
+				name LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	</if>
+</select>
+<!-- 목장자료 - 기존 목장 LIST-->
+<select id="selectFarmList" parameterType="Map" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM ( 
+   			SELECT 
+   				rownum as rnum, 
+   				A.*
+    		FROM (
+        			SELECT
+        				*
+       				FROM 
+       					RDA_TEST.FARM
+   					<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+					WHERE
+						<choose>
+							<when test="searchOption =='fname'">
+								 fname LIKE '%'||#{searchValue}||'%'
+							</when>
+							<when test="searchOption =='name'">
+								 name LIKE '%'||#{searchValue}||'%'
+							</when>
+						</choose>
+					</if>
+        			ORDER BY
+        				inputdate DESC
+      			) A
+    		WHERE 
+    			rownum &lt;= #{endRow}
+ 		) B
+	WHERE
+		B.rnum &gt;= #{beginRow}
+</select>
+<!-- 목장자료 - 기존 목장 EXCEL LIST -->
+<select id="selectFarmExcel" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM 
+		RDA_TEST.FARM 
+	ORDER BY
+		farm_id ASC
+</select>
+<!-- 목장 추가를 위한 ID값 SELECT -->
+<select id="selectFarmNewId" resultType="int">
+	SELECT 
+		NVL(max(farm_id),0)+1
+	FROM 
+		RDA_TEST.FARM
+</select>
+<!-- 목장 추가 -->
+<insert id="insertFarm" parameterType="com.kis.rda.farm.domain.Farm">
+	INSERT INTO rda_test.farm (
+		farm_id, 
+		address, 
+		fname, 
+		phone1, 
+		email, 
+		kc, 
+		mc, 
+		calf, 
+		hp1, 
+		name, 
+		phone2, 
+		phone3, 
+		hp2, 
+		hp3
+	) 
+	VALUES(
+		#{farmId},
+		#{address},
+		#{fname},
+		#{phone1},
+		#{email},
+		#{kc},
+		#{mc},
+		#{calf},
+		#{hp1},
+		#{name},
+		#{phone2},
+		#{phone3},
+		#{hp2},
+		#{hp3}
+	)	
+</insert>
+<!-- 목장자료 - 기존 목장 DETAIL -->
+<select id="selectFarmDetail" parameterType="String" resultType="com.kis.rda.farm.domain.Farm">
+	SELECT
+		*
+	FROM
+		RDA_TEST.FARM
+	WHERE
+		farm_id = #{farmId}
+</select>
+<!-- 목장자료 - 기존 목장 UPDATE -->
+<update id="updateFarm" parameterType="com.kis.rda.farm.domain.Farm">
+	UPDATE rda_test.farm 
+	SET
+		fname = #{fname},
+		address = #{address},
+		phone1 = #{phone1},
+		kc = #{kc},
+		mc = #{mc},
+		calf = #{calf},
+		hp1 = #{hp1},
+		name = #{name},
+		phone2 = #{phone2},
+		phone3 = #{phone3},
+		hp2 = #{hp2},
+		hp3 = #{hp3},
+		updatedate = to_date(SYSDATE, 'YY-MM-DD HH24:MI:SS') 
+	WHERE 
+		farm_id = #{farmId}
+</update>
+<!-- 목장자료 - 기존 목장 DELETE -->
+<delete id="deleteFarm" parameterType="String">
+	DELETE FROM rda_test.farm 
+	WHERE 
+		farm_id = #{farmId}
+</delete>
+
+<!-- 목장자료 - 신규 목장 COUNT -->
+<select id="selectNewFarmCount" parameterType="Map" resultType="int">
+	SELECT
+		COUNT(farm_id)
+	FROM
+		RDA_TEST.NEWFARM
+	<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+	WHERE
+		<choose>
+			<when test="searchOption =='fname'">
+				farm_name LIKE '%'||#{searchValue}||'%'
+			</when>
+			<when test="searchOption =='name'">
+				name LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	</if>
+</select>
+<!-- 목장자료 - 신규 목장 LIST-->
+<select id="selectNewFarmList" parameterType="Map" resultType="com.kis.rda.farm.domain.NewFarm">
+	SELECT
+		*
+	FROM ( 
+   			SELECT 
+   				rownum as rnum, 
+   				A.*
+    		FROM (
+        			SELECT
+        				*
+       				FROM 
+       					RDA_TEST.NEWFARM
+   					<if test="searchValue != null and searchValue != '' and searchValue != 'none'">
+					WHERE
+						<choose>
+							<when test="searchOption =='fname'">
+								 file_name LIKE '%'||#{searchValue}||'%'
+							</when>
+							<when test="searchOption =='name'">
+								 name LIKE '%'||#{searchValue}||'%'
+							</when>
+						</choose>
+					</if>
+        			ORDER BY
+        				inputdate DESC
+      			) A
+    		WHERE 
+    			rownum &lt;= #{endRow}
+ 		) B
+	WHERE
+		B.rnum &gt;= #{beginRow}
+</select>
+<!-- 목장자료 - 기존 목장 EXCEL LIST -->
+<select id="selectNewFarmExcel" resultType="com.kis.rda.farm.domain.NewFarm">
+	SELECT
+		*
+	FROM 
+		RDA_TEST.NEWFARM 
+	ORDER BY
+		farm_id ASC
+</select>
+</mapper>

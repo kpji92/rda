@@ -1,0 +1,23 @@
+.navigation_001 .title {
+    padding: 3px 0 3px 5px;
+    border-top:1px solid #aaa;
+    border-bottom:1px solid #aaa;
+    background-color:#eee;
+    font-weight: bold;    
+}
+.navigation_001 .list { display:block; position:relative; padding:4px 0 4px 24px; background-image:url(../images/navigation/iconNavigation.gif); background-repeat:no-repeat;} 
+.navigation_001 ul { list-style:none; position:relative; *zoom:1; margin:0; padding:0;}
+.navigation_001 li{ list-style:none; position:relative; *zoom:1; margin:0; padding:0;}
+.navigation_001 li a{ display:block; position:relative; padding:4px 0 4px 24px; background-image:url(../images/navigation/iconNavigation.gif); background-repeat:no-repeat;}
+.navigation_001 li.open a{ background-position:0 -24px; background-color:#eee; border-top:1px solid #ddd;  border-bottom:1px solid #ddd;}
+.navigation_001 li.open ul li a{ background-color:#fff; border:0;}
+.navigation_001 li ul{ display:none; margin:10px 0 20px 24px;}
+.navigation_001 li.open ul{ display:block;}
+.navigation_001 li ul li a{ padding:2px 0 2px 5px; background-image:none;color: #888888;}
+.navigation_001 li ul li.active a { font-weight: 700;color: #666666;}
+.navigation_001 li a:hover,
+.navigation_001 li a:active,
+.navigation_001 li a:focus { background-color:#eee !important;}
+
+.navigation_001 a { text-decoration: none; color:#000000;}
+.navigation_001 a:active { text-decoration: underline;}

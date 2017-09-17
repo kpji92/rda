@@ -1,0 +1,48 @@
+.searchbox_001
+{
+    margin:auto;
+    padding: 10px 0 10px 0;   
+}
+    .searchbox_001 .type
+    {
+        float:left;
+    }
+    .searchbox_001 .text
+    {
+        float:left;
+        padding-left:5px;
+    }
+        .searchbox_001 .text input
+        {
+            height:16px;
+        }
+    .searchbox_001 .submit
+    {
+        float:left;
+        padding-left:5px;
+    }
+    
+    
+.searchbox_002
+{
+    margin:auto;
+    padding: 10px 0 10px 0;   
+}
+    .searchbox_002 .type
+    {
+        float:left;height:23px; 
+    }
+    .searchbox_002 .text
+    {
+        float:left;
+        padding-left:3px;
+    }
+        .searchbox_002 .text input
+        {
+            height:17px;font-size: 15px;
+        }
+    .searchbox_002 .submit
+    {
+        float:left;
+        padding-left:3px;
+    }
